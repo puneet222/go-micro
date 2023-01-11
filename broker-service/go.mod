@@ -1,4 +1,4 @@
-module github.com/puneet222/go-micro/broker
+module github.com/puneet222/go-micro/broker-service
 
 go 1.19
 
