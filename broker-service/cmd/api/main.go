@@ -17,15 +17,13 @@ func main() {
 
 	// define http server
 	srv := &http.Server{
-		Addr: fmt.Sprintf(":%s", webPort),
+		Addr:    fmt.Sprintf(":%s", webPort),
 		Handler: app.routes(),
 	}
 
 	// start the server
-	go func() {
-		if err := srv.ListenAndServe(); err != nil {
-			log.Panic(err)
-		}
-	}()
+	if err := srv.ListenAndServe(); err != nil {
+		log.Println(err)
+	}
 
 }
