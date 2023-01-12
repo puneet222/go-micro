@@ -14,7 +14,7 @@ RUN chmod +x /app/brokerApp
 
 # build a tiny docker image that run the binary from builder image
 
-FROM apline:latest
+FROM alpine:latest
 
 RUN mkdir /app
 
