@@ -44,7 +44,7 @@
             method: 'POST',
         }
 
-        fetch(`http://${vmIpAddress}:8080`, body)
+        fetch(`http:\/\/${vmIpAddress}:8080`, body)
         .then((response) => response.json())
         .then((data) => {
             sent.innerHTML ="empty post request";
