@@ -1,4 +1,4 @@
-module github.com/puneet222/go-micro/authentication-service
+module authentication
 
 go 1.19
 
