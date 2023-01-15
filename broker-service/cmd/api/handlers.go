@@ -81,7 +81,7 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 	var jsonFromService jsonResponse
 
 	err = json.NewDecoder(response.Body).Decode(&jsonFromService)
-	log.Println("error while decoding response body", )
+	log.Println("error while decoding response body", err)
 	if err != nil {
 		app.errorJSON(w, err, http.StatusUnauthorized)
 	}
