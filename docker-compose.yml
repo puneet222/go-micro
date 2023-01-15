@@ -13,6 +13,7 @@ services:
       mode: "replicated"
       replicas: 1
 
+
   authentication-service:
     build:
       context: ./authentication-service
@@ -26,6 +27,7 @@ services:
     environment:
       DSN: "host=postgres port=5432 password=password dbname=users sslmode=disabled timezone=UTC connect_timeout=5"
   
+
   postgres:
     image: 'postgres:14.2'
     ports:
