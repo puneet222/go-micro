@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -80,9 +81,12 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 	var jsonFromService jsonResponse
 
 	err = json.NewDecoder(response.Body).Decode(&jsonFromService)
+	log.Println("error while decoding response body", )
 	if err != nil {
 		app.errorJSON(w, err, http.StatusUnauthorized)
 	}
+
+	log.Println("broker service", "json from service", jsonFromService)
 
 	if jsonFromService.Error {
 		app.errorJSON(w, err, http.StatusUnauthorized)

@@ -3,6 +3,7 @@ package main
 import (
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -28,12 +29,11 @@ func (app *Config) authenticate(w http.ResponseWriter, r *http.Request) {
 	}
 
 	isMatched, err := user.PasswordMatches(requestPayload.Password)
-	if err != nil {
-		app.errorJSON(w, err, http.StatusInternalServerError)
-	}
+
+	log.Println("in auth service", isMatched, err)
 
 	if err != nil || !isMatched {
-		app.errorJSON(w, errors.New("invalid password"), http.StatusBadRequest)
+		app.errorJSON(w, errors.New("invalid password"), http.StatusUnauthorized)
 	}
 
 	payload := jsonResponse{
