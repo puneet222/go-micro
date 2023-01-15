@@ -38,6 +38,7 @@
     let output = document.getElementById("output");
     let sent = document.getElementById("payload");
     let recevied = document.getElementById("received");
+    let vmIpAddress = "34.125.96.64"
 
     authBrokerBtn.addEventListener("click", function() {
 
@@ -58,7 +59,7 @@
             headers: headers,
         }
 
-        fetch("http:\/\/localhost:8080/handle", body)
+        fetch(`http:\/\/${vmIpAddress}/handle`, body)
         .then((response) => response.json())
         .then((data) => {
             sent.innerHTML = JSON.stringify(payload, undefined, 4);
@@ -80,7 +81,7 @@
             method: 'POST',
         }
 
-        fetch("http:\/\/localhost:8080", body)
+        fetch(`http:\/\/${vmIpAddress}:8080`, body)
         .then((response) => response.json())
         .then((data) => {
             sent.innerHTML ="empty post request";
