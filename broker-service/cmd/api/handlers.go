@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -38,11 +39,13 @@ func (app *Config) handleSubmission(w http.ResponseWriter, r *http.Request) {
 		app.errorJSON(w, err, http.StatusBadRequest)
 	}
 
+	log.Println("action", rp.Action)
+
 	switch rp.Action {
 	case "auth":
 		app.authenticate(w, rp.Auth)
 	default:
-		app.errorJSON(w, errors.New(fmt.Sprint("Invlalid action %s", rp.Action)), http.StatusBadRequest)
+		app.errorJSON(w, fmt.Errorf("invalid action %s", rp.Action), http.StatusBadRequest)
 	}
 }
 
