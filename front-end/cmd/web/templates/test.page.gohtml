@@ -43,10 +43,10 @@
     authBrokerBtn.addEventListener("click", function() {
 
         const payload = {
-            action: "auth",
-            auth: {
-                email: "admin@example.com",
-                password: "verysecret!",
+            "action": "auth",
+            "auth": {
+                "email": "admin@example.com",
+                "password": "verysecret!",
             }
         }
 
@@ -59,7 +59,7 @@
             headers: headers,
         }
 
-        fetch(`http:\/\/${vmIpAddress}/handle`, body)
+        fetch(`http:\/\/${vmIpAddress}:8080/handle`, body)
         .then((response) => response.json())
         .then((data) => {
             sent.innerHTML = JSON.stringify(payload, undefined, 4);
