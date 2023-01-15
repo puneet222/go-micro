@@ -72,7 +72,7 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 		return
 	}
 
-	if response.StatusCode != http.StatusUnauthorized {
+	if response.StatusCode == http.StatusUnauthorized {
 		app.errorJSON(w, errors.New("invalid credentials"))
 		return
 	}
