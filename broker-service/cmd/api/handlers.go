@@ -39,6 +39,8 @@ func (app *Config) handleSubmission(w http.ResponseWriter, r *http.Request) {
 		app.errorJSON(w, err, http.StatusBadRequest)
 	}
 
+	log.Println("request payload")
+	log.Println(rp)
 	log.Println("action", rp.Action)
 
 	switch rp.Action {
