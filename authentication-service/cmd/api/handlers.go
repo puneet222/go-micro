@@ -34,7 +34,6 @@ func (app *Config) authenticate(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil || !isMatched {
 		app.errorJSON(w, errors.New("invalid password"), http.StatusBadRequest)
-		app.writeJSON(w, http.StatusOK, isMatched)
 	}
 
 	payload := jsonResponse{
