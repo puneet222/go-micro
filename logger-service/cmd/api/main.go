@@ -37,6 +37,8 @@ func main() {
 		log.Println("error while starting logger server", err)
 	}
 
+	log.Printf("logging server started at %v", webPort)
+
 }
 
 func connectToMongo() *mongo.Client {
@@ -50,6 +52,8 @@ func connectToMongo() *mongo.Client {
 			panic(err)
 		}
 	}()
+
+	log.Println("Connected to mongodb")
 
 	return client
 }
