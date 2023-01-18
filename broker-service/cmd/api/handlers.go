@@ -12,6 +12,7 @@ import (
 type requestPayload struct {
 	Action string      `json:"action"`
 	Auth   AuthPayload `json:"auth,omitempty"`
+	Log LogPayload `json:"log,omitempty"`
 }
 
 type AuthPayload struct {
@@ -47,6 +48,8 @@ func (app *Config) handleSubmission(w http.ResponseWriter, r *http.Request) {
 	switch rp.Action {
 	case "auth":
 		app.authenticate(w, rp.Auth)
+	case "log":
+		app.logItem(w, rp.Log)
 	default:
 		app.errorJSON(w, fmt.Errorf("invalid action %s", rp.Action), http.StatusBadRequest)
 	}
