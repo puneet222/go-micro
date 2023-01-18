@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"time"
 
@@ -14,7 +15,10 @@ type RequestPayload struct {
 
 func (app *Config) logEntry(w http.ResponseWriter, r *http.Request) {
 	var rp RequestPayload
-	app.readJSON(w, r, &rp)
+	err := app.readJSON(w, r, &rp)
+	if err != nil {
+		log.Println("unable to read json from request", err)
+	}
 
 	// log event
 	event := data.LogEntry{
@@ -24,7 +28,7 @@ func (app *Config) logEntry(w http.ResponseWriter, r *http.Request) {
 		UpdatedAt: time.Now(),
 	}
 
-	err := app.Models.LogEntry.Insert(event)
+	err = app.Models.LogEntry.Insert(event)
 	if err != nil {
 		app.errorJSON(w, err)
 	}
