@@ -32,12 +32,12 @@ func main() {
 		Handler: app.routes(),
 	}
 
+	log.Printf("starting logging service at %v", webPort)
+
 	err := srv.ListenAndServe()
 	if err != nil {
 		log.Println("error while starting logger server", err)
 	}
-
-	log.Printf("logging server started at %v", webPort)
 
 }
 
