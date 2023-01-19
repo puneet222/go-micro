@@ -18,7 +18,7 @@ type Config struct {
 
 const (
 	webPort  = "80"
-	mongoURL = "mongodb://admin:password@localhost:27017/?maxPoolSize=20&w=majority"
+	mongoURL = "mongodb://admin:password@mongo:27017/?maxPoolSize=20&w=majority"
 )
 
 func main() {
