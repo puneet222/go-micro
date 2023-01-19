@@ -54,6 +54,8 @@ func connectToMongo() *mongo.Client {
 		}
 	}()
 
+	log.Println("ping mongodb client")
+
 	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
 		log.Fatal(err)
 	}

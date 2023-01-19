@@ -20,6 +20,8 @@ func (app *Config) logEntry(w http.ResponseWriter, r *http.Request) {
 		log.Println("unable to read json from request", err)
 	}
 
+	log.Println("in hererer ere r er er e")
+
 	// log event
 	event := data.LogEntry{
 		Name:      rp.Name,
@@ -28,16 +30,18 @@ func (app *Config) logEntry(w http.ResponseWriter, r *http.Request) {
 		UpdatedAt: time.Now(),
 	}
 
-	err = app.Models.LogEntry.Insert(event)
-	if err != nil {
-		app.errorJSON(w, err)
-	}
+	log.Println("event", event)
 
-	resp := jsonResponse{
-		Error:   false,
-		Message: "logged",
-		Data:    event,
-	}
-
-	app.writeJSON(w, http.StatusAccepted, resp)
+	//err = app.Models.LogEntry.Insert(event)
+	//if err != nil {
+	//	app.errorJSON(w, err)
+	//}
+	//
+	//resp := jsonResponse{
+	//	Error:   false,
+	//	Message: "logged",
+	//	Data:    event,
+	//}
+	//
+	//app.writeJSON(w, http.StatusAccepted, resp)
 }

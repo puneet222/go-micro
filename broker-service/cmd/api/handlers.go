@@ -45,6 +45,9 @@ func (app *Config) handleSubmission(w http.ResponseWriter, r *http.Request) {
 		app.errorJSON(w, err, http.StatusBadRequest)
 	}
 
+	log.Println("handle submission")
+	log.Println(rp)
+
 	switch rp.Action {
 	case "auth":
 		app.authenticate(w, rp.Auth)
@@ -62,6 +65,8 @@ func (app *Config) logItem(w http.ResponseWriter, l LogPayload) {
 		err = app.errorJSON(w, err, http.StatusBadRequest)
 		return
 	}
+
+	log.Println("calling logger service")
 
 	// call the microservice
 	request, err := http.NewRequest(http.MethodPost, "http://logger-service/log", bytes.NewBuffer(jsonPayload))
