@@ -9,6 +9,7 @@ import (
 	"github.com/puneet222/go-micro/logger-service/data"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 type Config struct {
@@ -52,6 +53,10 @@ func connectToMongo() *mongo.Client {
 			panic(err)
 		}
 	}()
+
+	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
+		log.Fatal(err)
+	}
 
 	log.Println("Connected to mongodb")
 
