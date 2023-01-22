@@ -61,8 +61,5 @@ services:
     deploy:
       mode: "replicated"
       replicas: 1
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=admin
-      - MONGO_INITDB_ROOT_PASSWORD=password
     volumes:
       - ./db-data/mongo/:/data/db
