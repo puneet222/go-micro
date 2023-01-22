@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 	"fmt"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
 	"log"
 	"net/http"
 
 	"github.com/puneet222/go-micro/logger-service/data"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
-	"go.mongodb.org/mongo-driver/mongo/readpref"
 )
 
 type Config struct {
@@ -18,7 +18,7 @@ type Config struct {
 
 const (
 	webPort  = "80"
-	mongoURL = "mongodb://admin:password@mongo:27017/?maxPoolSize=20&w=majority"
+	mongoURL = "mongodb://localhost:27017"
 )
 
 func main() {
@@ -44,19 +44,29 @@ func main() {
 
 func connectToMongo() *mongo.Client {
 	// Create a new client and connect to the server
-	client, err := mongo.Connect(context.TODO(), options.Client().ApplyURI(mongoURL))
+	clientOptions := options.Client().ApplyURI(mongoURL)
+	clientOptions.SetAuth(options.Credential{
+		Username: "admin",
+		Password: "password",
+	})
+
+	// connect
+	client, err := mongo.Connect(context.TODO(), clientOptions)
 	if err != nil {
-		panic(err)
+		log.Println("Error connecting:", err)
+		return nil
 	}
+
 	defer func() {
 		if err = client.Disconnect(context.TODO()); err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
 	}()
 
-	log.Println("ping mongodb client")
+	log.Println("pinging mongodb client")
 
 	if err = client.Ping(context.TODO(), readpref.Primary()); err != nil {
+		log.Println(err)
 		log.Fatal(err)
 	}
 
